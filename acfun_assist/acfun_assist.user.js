@@ -1,8 +1,9 @@
 // ==UserScript==
 // @name        acfun_assist
 // @namespace   https://github.com/jsgscat/greasemonkey
-// @include     http://www.acfun.tv/*
-// @version     1.03
+// @include     http://www.acfun.cn/a/*
+// @include     http://www.acfun.cn/v/ac*
+// @version     1.04
 // @grant       none
 // @downloadURL https://rawgit.com/jsgscat/greasemonkey/master/acfun_assist/acfun_assist.user.js
 // @updateURL   https://rawgit.com/jsgscat/greasemonkey/master/acfun_assist/acfun_assist.user.js
@@ -18,7 +19,7 @@ div.style = 'position: fixed; top: 0; left: 0; z-index: 99;';
 
 var btSlow = document.createElement('button');
 btSlow.id = btSlow;
-btSlow.innerHTML = 'Slow';
+btSlow.innerHTML = '▶';
 btSlow.onclick = function() {
     $(document.documentElement).animate({scrollTop:document.getElementById('area-comment').offsetTop}, document.getElementById('area-comment').offsetTop * 10);
 };
@@ -26,7 +27,7 @@ div.appendChild(btSlow);
 
 var btStop = document.createElement('button');
 btStop.id = btStop;
-btStop.innerHTML = 'Stop';
+btStop.innerHTML = '■';
 btStop.onclick = function() {
     $(document.documentElement).stop();
 };
@@ -34,7 +35,7 @@ div.appendChild(btStop);
 
 var btFast = document.createElement('button');
 btFast.id = btFast;
-btFast.innerHTML = 'Comment';
+btFast.innerHTML = '▼';
 btFast.onclick = function() {
     // $(document.documentElement).stop().animate({scrollTop:document.getElementById('area-comment').offsetTop}, 100);
     $(document.documentElement).stop().scrollTop(document.getElementById('area-comment').offsetTop);
@@ -44,7 +45,7 @@ div.appendChild(btFast);
 
 var btReturn = document.createElement('button');
 btReturn.id = btReturn;
-btReturn.innerHTML = 'Return';
+btReturn.innerHTML = '▲';
 btReturn.onclick = function() {
     // $(document.documentElement).stop().animate({scrollTop:0}, 100);
     $(document.documentElement).stop().scrollTop(0);
