@@ -2,13 +2,16 @@
 // @name        leanote_blog_repair_navigation
 // @namespace   https://github.com/jsgscat/greasemonkey
 // @include     http://blog.leanote.com/post/mynote/*
-// @version     1.01
+// @version     1.02
 // @grant       none
 // @downloadURL https://rawgit.com/jsgscat/greasemonkey/master/leanote_blog_repair_navigation/leanote_blog_repair_navigation.user.js
 // @updateURL   https://rawgit.com/jsgscat/greasemonkey/master/leanote_blog_repair_navigation/leanote_blog_repair_navigation.user.js
 // ==/UserScript==
 console.log('leanote_blog_repair_navigation begin');
 // var toc = document.getElementsByClassName('toc');
+
+console.log(document.body.clientHeight);
+console.log(document.documentElement.clientHeight );
 
 function dfs() {
     if (document.getElementsByClassName('nav-h1').length <= 0) {
@@ -44,9 +47,20 @@ function main() {
         h4_anchor[i].childNodes[0].outerHTML = h4_anchor[i].childNodes[0].outerHTML.replace('scrollTo', 'window.scrollTo');
     }
 
-    $('#blogNavContent').css({
-        'max-height': 'none'
+    $('#blogNav').css({
+        'right': '0px',
+        'left': ''
     })
+
+    $('#blogNavContent').css({
+        'max-height': document.documentElement.clientHeight * 0.8
+    });
+
+    window.onresize = function() {
+        $('#blogNavContent').css({
+        'max-height': document.documentElement.clientHeight * 0.8
+    });
+    };
     console.log('leanote_blog_repair_navigation end');
 }
 

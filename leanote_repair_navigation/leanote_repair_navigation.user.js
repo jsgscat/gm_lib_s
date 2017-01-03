@@ -2,7 +2,7 @@
 // @name        leanote_repair_navigation
 // @namespace   https://github.com/jsgscat/greasemonkey
 // @include     https://leanote.com/note/*
-// @version     1.01
+// @version     1.02
 // @grant       none
 // @downloadURL https://rawgit.com/jsgscat/greasemonkey/master/leanote_repair_navigation/leanote_repair_navigation.user.js
 // @updateURL   https://rawgit.com/jsgscat/greasemonkey/master/leanote_repair_navigation/leanote_repair_navigation.user.js
@@ -25,22 +25,84 @@
 // console.log('%O', document.getElementsByClassName('slimScrollDiv')[1]);
 // console.log('%O', document.getElementsByClassName('slimScrollDiv')[1]);
 // console.log(document.getElementsByClassName('slimScrollDiv')[1].outerHTML);
+var DEBUG = false;
+
+dfs();
 
 function dfs() {
     if (document.getElementsByTagName('h1').length <= 2) {
-        console.log('wait 500.');
+        if (DEBUG) {
+            console.log('wait 500.');
+        }
         setTimeout(dfs, 500);
     } else {
-        console.log('hey.');
+        if (DEBUG) {
+            console.log('wait dfs completed.');
+        }
+        main();
+        noteClick();
+        notebookClick();
+        setTimeout(main, 1000);
+    }
+}
+
+
+function notebookClick() {
+    $(".level0").click(function() {
+        waitNotebook(document.getElementsByTagName('h1')[1].innerHTML);
+    });
+}
+
+
+function waitNotebook(h1) {
+    if (document.getElementsByTagName('h1')[1].innerHTML == h1) {
+        if (DEBUG) {
+            console.log('waitNotebook 100.');
+        }
+        setTimeout(function() {
+            waitNotebook(h1);
+        }, 100);
+    } else {
+        if (DEBUG) {
+            console.log('waitNotebook completed.');
+        }
+        noteClick();
+        main();
+        setTimeout(main, 1000);
+    }
+}
+
+
+function noteClick() {
+    // $('div[class = ".item item-my"]').click(alert('hey.'));
+    $(".item.item-my").click(function() {
+        waitNote(document.getElementsByTagName('h1')[1].innerHTML);
+        setTimeout(main, 1000);
+    });
+}
+
+
+function waitNote(h1) {
+    if (document.getElementsByTagName('h1')[1].innerHTML == h1) {
+        if (DEBUG) {
+            console.log('waitNote 100.');
+        }
+        setTimeout(function() {
+            waitNote(h1);
+        }, 100);
+    } else {
+        if (DEBUG) {
+            console.log('waitNote completed.');
+        }
         main();
     }
 }
 
-dfs();
 
 function main() {
-
-    console.log('begin');
+    if (DEBUG) {
+        console.log('begin');
+    }
 
     var mapTitle = new Array();
     var h1 = document.getElementsByTagName('h1');
@@ -150,5 +212,7 @@ function main() {
     // };
     // document.getElementById('newMyNote').appendChild(pp);
 
-    console.log('end');
+    if (DEBUG) {
+        console.log('end');
+    }
 }
