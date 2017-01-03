@@ -33,6 +33,15 @@ btStop.onclick = function() {
 };
 div.appendChild(btStop);
 
+var btReturn = document.createElement('button');
+btReturn.id = btReturn;
+btReturn.innerHTML = '▲';
+btReturn.onclick = function() {
+    // $(document.documentElement).stop().animate({scrollTop:0}, 100);
+    $(document.documentElement).stop().scrollTop(0);
+};
+div.appendChild(btReturn);
+
 var btFast = document.createElement('button');
 btFast.id = btFast;
 btFast.innerHTML = '▼';
@@ -42,14 +51,5 @@ btFast.onclick = function() {
     //$(document.documentElement).stop().scrollTop($('#area-comment').offset().top);
 };
 div.appendChild(btFast);
-
-var btReturn = document.createElement('button');
-btReturn.id = btReturn;
-btReturn.innerHTML = '▲';
-btReturn.onclick = function() {
-    // $(document.documentElement).stop().animate({scrollTop:0}, 100);
-    $(document.documentElement).stop().scrollTop(0);
-};
-div.appendChild(btReturn);
 
 document.documentElement.appendChild(div);
