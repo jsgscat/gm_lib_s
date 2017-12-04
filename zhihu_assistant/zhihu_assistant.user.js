@@ -1,9 +1,9 @@
 // ==UserScript==
 // @name        zhihu_assistant
 // @namespace   https://github.com/jsgscat/greasemonkey
-// @description 回答的导航栏
+// @description 回答的导航栏，隐藏标题
 // @include     *www.zhihu.com/question/*
-// @version     1
+// @version     1.01
 // @grant       none
 // @downloadURL https://rawgit.com/jsgscat/greasemonkey/master/zhihu_assistant/zhihu_assistant.user.js
 // @updateURL   https://rawgit.com/jsgscat/greasemonkey/master/zhihu_assistant/zhihu_assistant.user.js
@@ -206,6 +206,9 @@ function main() {
         }
     }
 
+    // 隐藏标题
+    var title = document.getElementsByClassName('QuestionHeader-title');
+    title[0].innerHTML = '';
     DEBUG && console.log('all end.');
 }
 
